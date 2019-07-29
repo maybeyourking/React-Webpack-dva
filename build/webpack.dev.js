@@ -39,6 +39,7 @@ files.forEach((file) => {
 module.exports = {
     mode: 'development',//模式,表示dev环境
     devtool:"cheap-module-eval-source-map",// 开发环境配置最佳实践
+    //devtool译为webpack的调试模式，可以配置sourceMap
     //sourceMap本质上是一种映射关系，打包出来的js文件中的代码可以映射到代码文件的具体位置,这种映射关系会帮助我们直接找到在源代码中的错误。
     //可以直接在devtool中使用.合理的使用source-map可以帮助我们提高开发效率，更快的定位到错误位置。生产环境和开发环境的devtool配置是不同的。
     //我们可以在webpack.dev.js中添加devtool。
