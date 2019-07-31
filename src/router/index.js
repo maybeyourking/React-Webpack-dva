@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense,lazy} from 'react';
 import PropTypes from 'prop-types';
 import {
   routerRedux,
@@ -6,9 +6,10 @@ import {
   Switch,
   Redirect
 } from 'dva/router';
+import {Spin} from 'antd';
 import Page404 from '../pages/404';
 import Login from '../layout/Login';
-import Home from '../layout/Index';
+const Home = lazy(() => import(/* webpackChunkName: "home-vendor" */'../layout/Index'));
 import Homepage from '../pages/Home';
 import Setting from '../pages/Setting';
 import Chess from '../pages/Mydemo/chess';
@@ -17,10 +18,12 @@ import Planegame from '../pages/Mydemo/Planegame';
 import Yunapp from '../pages/Mydemo/Yunapp';
 
 const {ConnectedRouter} = routerRedux;
+//Suspense 组件为路由组件未加载成功之前做的操作，lazy()方法为路由懒加载
 
 export default function Router({history}) {
   return (
     <ConnectedRouter history={history}>
+      <Suspense fallback={<Spin size="large" style={{position:'fixed',top:'50%',left:'50%'}}/>}>
       <Switch>
         <Route path="/" exact component={Login} />
         <Route path='/login' component={Login}/>
@@ -39,6 +42,7 @@ export default function Router({history}) {
         <Route path="/404" component={Page404} />
         <Redirect from='/' to='/404'></Redirect>
       </Switch>
+      </Suspense>
     </ConnectedRouter>
   );
 }
