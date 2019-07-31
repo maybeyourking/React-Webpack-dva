@@ -19,6 +19,7 @@
 - [x] DellPlugin
 - [x] PWA
 - [x] eslint
+- [x] 路由懒加载
 
 
 ### 快速开始
